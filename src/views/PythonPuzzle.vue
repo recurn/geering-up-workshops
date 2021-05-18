@@ -83,10 +83,13 @@ while "_______":
  
     </pre>
   </code>
+  <Chat />
 </template>
 
 <script>
+  import Chat from "@/components/Chat.vue";
   export default {
+    components: { Chat },
     methods: {
       copy() {
         let text = document.getElementsByClassName("code-block")[0].textContent;
@@ -105,7 +108,7 @@ while "_______":
   };
 </script>
 
-<style>
+<style lang="scss">
   .copy-nav button,
   .copy-nav a {
     display: inline-block;
@@ -117,6 +120,12 @@ while "_______":
     background: none;
     border-radius: 3px;
     border: 1px solid black;
+    cursor: pointer;
+
+    &:hover {
+      background: black;
+      color: white;
+    }
   }
   code {
     display: inline-block;
