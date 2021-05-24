@@ -29,8 +29,8 @@
       </button>
     </form>
   </div>
-  <div v-if="!name">
-    <form @submit.prevent="setName">
+  <div class="shadow-box chat-window entry" v-if="!name">
+    <form @submit.prevent="setName" autocomplete="off">
       <p>What should we call you?</p>
       <input type="text-area" name="name" placeholder="name" />
       <button>Enter Chat</button>
@@ -53,7 +53,7 @@
     },
     setup() {
       const startOfDay = new Date();
-      startOfDay.setHours(startOfDay.getHours()-1);
+      startOfDay.setHours(startOfDay.getHours() - 1);
 
       const { documents } = getCollection("messages", "time", [
         "time",
@@ -74,7 +74,10 @@
             name: reply.name, //this is the problem
             replies: [],
           };
-          let newMessage = { ...message, replies: [...message.replies, newReply] };
+          let newMessage = {
+            ...message,
+            replies: [...message.replies, newReply],
+          };
 
           await updateDoc(newMessage);
         }
@@ -112,6 +115,32 @@
 </script>
 
 <style lang="scss">
+form{
+  display: flex;
+  align-items: center;
+}
+  .entry form {
+    margin: auto;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+
+    & input {
+      height: 1.6em;
+      padding-left: 10px;
+      border-radius: 20px;
+
+      &:focus{
+        outline: none;
+      }
+    }
+
+    & button {
+      margin: 10px;
+      font-size: 0.8em;
+    }
+  }
   .chat-window {
     width: 80%;
     max-width: 1000px;
@@ -154,6 +183,7 @@
     & button {
       margin-left: auto;
       border: none;
+      border-radius: 100%;
       background: none;
       color: var(--accent);
     }

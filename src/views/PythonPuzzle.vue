@@ -115,7 +115,7 @@ while "_______":
   a {
     cursor: pointer;
   }
-  .copy-nav button,
+  button,
   .copy-nav a {
     background-color: var(--accent);
     border: none;
