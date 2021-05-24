@@ -6,9 +6,13 @@
 </template>
 
 <script>
+  import { useRouter } from "vue-router";
 
-
-export default {
-  name: 'Home',
-}
+  export default {
+    name: "Home",
+    beforeMount() {
+      const router = useRouter();
+      router.push({ name: "Python Puzzle" });
+    },
+  };
 </script>

@@ -1,13 +1,14 @@
 <template>
-  <h1>Python Puzzle</h1>
-  <h2>Code</h2>
-  <div class="copy-nav">
-    <button @click="copy">Copy</button>
-    <a href="https://codecollab.io" target="blank">Editor</a>
-  </div>
+  <div class="content">
+    <h1>Python Puzzle</h1>
+    <h2>Code</h2>
+    <div class="copy-nav">
+      <button @click="copy">Copy Code</button>
+      <a href="https://codecollab.io" target="blank">Go to Editor</a>
+    </div>
 
-  <code>
-    <pre class="prettyprint lang-py code-block">
+    <code>
+      <pre class="prettyprint lang-py code-block">
        
 # welcoming the user
 name = input("What is your name? ")
@@ -82,8 +83,9 @@ while "_______":
         "______"
  
     </pre>
-  </code>
-  <Chat />
+    </code>
+    <Chat />
+  </div>
 </template>
 
 <script>
@@ -109,23 +111,37 @@ while "_______":
 </script>
 
 <style lang="scss">
+  button,
+  a {
+    cursor: pointer;
+  }
   .copy-nav button,
   .copy-nav a {
-    display: inline-block;
-    padding: 5px 10px;
-    margin: auto 10px;
+    background-color: var(--accent);
+    border: none;
+    padding: 0.9em 1em;
+    margin: 0 1em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition-duration: 0.4s;
+    color: #fff;
     text-decoration: none;
-    color: black;
-    font-size: 1.2rem;
-    background: none;
-    border-radius: 3px;
-    border: 1px solid black;
+    font-size: 1em;
+    border-radius: 100px;
     cursor: pointer;
 
     &:hover {
-      background: black;
+      background-color: #da5558;
       color: white;
     }
+  }
+
+  .copy-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: 500px;
+    margin: auto;
   }
   code {
     display: inline-block;

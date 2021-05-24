@@ -1,0 +1,10 @@
+:root{
+    --primary: #50c8eb;
+    --accent:#e85f62;
+    --primary-alt:#88d9f1 ;
+}
+
+.content {
+    margin: auto;
+    text-align: center;
+}

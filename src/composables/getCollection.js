@@ -3,7 +3,7 @@ import {projectFirestore} from '../firebase/config'
 
 
 //collection is a string, which is the name of the firebase collection
-const getCollection = (collection, query) => {
+const getCollection = (collection, order, query) => {
     const documents = ref(null)
     const error = ref(null)
     
@@ -12,6 +12,9 @@ const getCollection = (collection, query) => {
 
     if(query){
         collectionRef = collectionRef.where(...query)
+    }
+    if(order){
+        collectionRef = collectionRef.orderBy(order);
     }
 
     const unsub = collectionRef.onSnapshot((snap) => {
