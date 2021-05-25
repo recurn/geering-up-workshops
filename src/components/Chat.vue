@@ -1,5 +1,5 @@
 <template>
-  <h1>Chat</h1>
+  <h1>Help and Announcements</h1>
   <div class="shadow-box chat-window" v-if="name">
     <div class="chat-box">
       <div class="chat-messages" v-for="message in documents" :key="message.id">
@@ -29,7 +29,7 @@
       </button>
     </form>
   </div>
-  <div class="shadow-box chat-window entry" v-if="!name">
+  <div class="shadow-box chat-window entry" v-if="!name && !user">
     <form @submit.prevent="setName" autocomplete="off">
       <p>What should we call you?</p>
       <input type="text-area" name="name" placeholder="name" />
@@ -45,7 +45,8 @@
 
   import Message from "@/components/Message.vue";
   import { timestamp } from "@/firebase/config.js";
-  import { ref } from "vue";
+  import { ref, watch } from "vue";
+  import getUser from "@/composables/getUser"
 
   export default {
     components: {
@@ -54,6 +55,8 @@
     setup() {
       const startOfDay = new Date();
       startOfDay.setHours(startOfDay.getHours() - 1);
+
+      const {user} = getUser();
 
       const { documents } = getCollection("messages", "time", [
         "time",
@@ -64,7 +67,18 @@
 
       const name = ref("");
 
+      watch(() => {
+        if(user.value){
+          name.value = user.value.displayName;
+        }
+      })
+
       const messageText = ref("");
+
+      const checkAdmin = () => {
+        if (user.value) return true;
+        else return false;
+      } 
 
       const sendReply = async (reply, message) => {
         if (reply) {
@@ -73,6 +87,7 @@
             message: reply.text,
             name: reply.name, //this is the problem
             replies: [],
+            admin: checkAdmin()
           };
           let newMessage = {
             ...message,
@@ -89,6 +104,7 @@
           time: timestamp(),
           name: name.value,
           replies: [],
+          admin: checkAdmin()
         };
 
         console.log(message);
@@ -109,6 +125,7 @@
         messageText,
         sendMessage,
         sendReply,
+        user
       };
     },
   };
