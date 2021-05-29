@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import PythonPuzzle from '../views/PythonPuzzle'
 import Login from '../views/Login.vue'
+import WinBig from '../views/WinBig.vue'
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/winbig',
+    name: 'Win Big',
+    component: WinBig,
   },
 ]
 

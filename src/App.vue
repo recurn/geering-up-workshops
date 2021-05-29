@@ -3,6 +3,7 @@
     <img src="@/assets/GU_wordmark.png" alt="" />
     <!-- <router-link to="/">Home</router-link>  -->
     <router-link to="/pythonpuzzle">Python Puzzle</router-link>
+    <router-link to="/winbig">Win Big</router-link>
   </div>
   <router-view />
 </template>
